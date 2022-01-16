@@ -44,7 +44,7 @@ torch.manual_seed(args.seed)
 use_cuda = not args.no_cuda and torch.cuda.is_available()
 device = torch.device('cuda' if use_cuda else 'cpu')
 
-ds = 'ham'
+ds = 'mnist'
 if ds == 'ham':
     in_channels = 3
     n_classes = 2
@@ -116,7 +116,7 @@ test_loader = data.DataLoader(
 
 )
 
-model = IICNet(in_channels=in_channels, n_classes=n_classes, n_heads=args.n_heads, pretrained=True).to(device)
+model = IICNet(in_channels=in_channels, n_classes=n_classes, n_heads=args.n_heads, pretrained=False).to(device)
 optimizer = optim.Adam(model.parameters(), lr=args.lr)
 scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[int(args.epochs*0.5), int(args.epochs*0.8)], gamma=0.1) # 10 < 20 < 40
 #scheduler = optim.lr_scheduler.CosineAnnealingWarmRestarts(optimizer, T_0=30, T_mult=2, eta_min=args.lr*1e-3)

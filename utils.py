@@ -11,7 +11,7 @@ def my_transforms(x, input_size=224):
         tf.ToPILImage(),
         tf.RandomAffine(30, translate=(0.1, 0.1), scale=(0.9, 1.1)),
         tf.RandomPerspective(0.2, 0.9),
-        tf.Resize(input_size, input_size),
+        tf.Resize((input_size, input_size), tf.InterpolationMode.BICUBIC),
         tf.RandomHorizontalFlip(),
         tf.RandomVerticalFlip(),
         tf.ColorJitter(0.4, 0.4, 0.4),
